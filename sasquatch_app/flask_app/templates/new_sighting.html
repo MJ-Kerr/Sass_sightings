@@ -11,8 +11,35 @@
     <title>New Sas</title>
 </head>
 
-<body>
-    <h1>Is he Real???</h1>
+<body class="p-5">
+    <h1>Did you see him {{logged_in_user.first_name}} {{logged_in_user.last_name}}</h1>
+    <a href="/logout">Logout</a>
+    <a href="/dash">Home</a>
+    <div>
+        {% for message in get_flashed_messages() %}
+            <p class="text-danger">{{message}}</p>
+        {% endfor %}
+    </div>
+    <form action="/sightings/create" method="post"> New Sightings
+        <input type="hidden" name="user_id" value="{{session.user_id}}">
+        <div>
+            Location:<input type="text" name="location">
+        </div>
+        <div>
+            What Happened:<br>
+            <textarea name="what_happened" cols="30" rows="4"></textarea>
+        </div>
+        <div>
+            Date of Sighting:<input type="date" name="sight_date">
+        </div>
+        <div>
+            # of Sasquatches:<input type="number" name="how_many">
+        </div>
+        <div>
+            <button>Report Sighting</button>
+        </div>
+
+    </form>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
         integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p'

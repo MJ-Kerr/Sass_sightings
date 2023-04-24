@@ -35,6 +35,8 @@ def dash():
     if "user_id" not in session:
         return redirect("/")
     logged_in_user = User.get_user(session["user_id"])
+
+    
 #  =========================return all the sightings====================
     all_sightings = sighting_model.Sighting.get_all()
     return render_template("dash.html", logged_in_user=logged_in_user, all_sightings=all_sightings)

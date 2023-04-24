@@ -11,8 +11,38 @@
     <title>Sas Update</title>
 </head>
 
-<body>
-    <h1>Update Sasquatch</h1>
+
+<body class="p-5">
+    <h1>Update Sasquatch {{sighting.users.first_name}} {{sighting.users.last_name}}</h1>
+
+    <a href="/dash">Home</a>
+    <a href="/logout">Logout</a>
+    <div>
+        {% for message in get_flashed_messages() %}
+        <p class="text-danger">{{message}}</p>
+        {% endfor %}
+    </div>
+    <form action="/sightings/update" method="post"> New Sightings
+        <input type="hidden" name="sight_id" value="{{sighting.sight_id}}">
+        <div>
+            Location:<input type="text" name="location" value="{{sighting.location}}">
+        </div>
+        <div>
+            What Happened:<br>
+            <textarea name="what_happened" cols="30" rows="4">{{sighting.what_happened}}</textarea>
+        </div>
+        <div>
+            Date of Sighting:<input type="date" name="sight_date" value="{{sighting.sight_date}}">
+        </div>
+        <div>
+            # of Sasquatches:<input type="number" name="how_many" value="{{sighting.how_many}}">
+        </div>
+        <div>
+            <button>Update Sighting</button>
+        </div>
+
+    </form>
+
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
         integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p'

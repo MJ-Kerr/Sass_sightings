@@ -16,26 +16,29 @@
     </h1>
     <a href="/logout" class="text-center bg-info text-dark border border-dark border-solid border-3 m-5">Get Me Outta
         Here!</a>
+        <a href="sightings/new">New Sighting 👣!!!</a>
     <div class="p-5">
         <ul class="list-group">
-            {% for one_sighting in all_sightings%}
+            {% for one_sighting in all_sightings %}
             <li class="list-group-item">
                 <div>
                     <p>{{one_sighting.location}} - {{one_sighting.sight_date}}</p>
+                    <p>Description:{{one_sighting.what_happened}}</p>
                     <p>Reported by:{{one_sighting.users.first_name}} {{one_sighting.users.last_name}}</p>
                 </div>
                 <div>
-                    <a href="">View</a>
+                    <a href="/sighting/{{one_sighting.sight_id}}">View</a>
                     {% if session['user_id'] == one_sighting.users.id %}
-                        <a href="">Edit</a>
-                        <a href="">Delete</a>
+                        <a href="update/{{one_sighting.sight_id}}">Edit</a>
+                        <form action="/sightings/delete/{{one_sighting.sight_id}}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
                     {% endif %}
                 </div>
             </li>
             {% endfor %}
         </ul>
     </div>
-    <a href="sightings/new">New Sighting 👣!!!</a>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
         integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p'
